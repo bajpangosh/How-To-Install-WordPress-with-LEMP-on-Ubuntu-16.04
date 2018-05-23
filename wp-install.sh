@@ -18,7 +18,7 @@ sudo apt-get install pwgen -y
 echo "Sit back and relax :) ......"
 sleep 2;
 cd /etc/nginx/sites-available/
-wget -O "$DOMAIN" https://goo.gl/s8pdtv
+wget -O "$DOMAIN" https://goo.gl/T3YBrn
 sed -i -e "s/example.com/$DOMAIN/" "$DOMAIN"
 sed -i -e "s/www.example.com/www.$DOMAIN/" "$DOMAIN"
 sudo ln -s /etc/nginx/sites-available/"$DOMAIN" /etc/nginx/sites-enabled/
