@@ -1,0 +1,58 @@
+server {
+	listen 443 ssl http2;
+	listen [::]:443 ssl http2;
+	root /var/www/example.com;
+	index index.html index.htm index.php;
+	server_name example.com www.example.com;
+	location / {
+		#try_files $uri $uri/ =404;
+		try_files $uri $uri/ /index.php?q=$uri&$args;
+	}
+	location ~* \.(txt|xml|js)$ {
+		expires 8d;
+	}
+	location ~* \.(css)$ {
+		expires 8d;
+	}
+	location ~* \.(flv|ico|pdf|avi|mov|ppt|doc|mp3|wmv|wav|mp4|m4v|ogg|webm|aac|eot|ttf|otf|woff|svg)$ {
+		expires 8d;
+	}
+	location ~* \.(jpg|jpeg|png|gif|swf|webp)$ {
+		expires 8d;
+	}
+	ssl_certificate /etc/nginx/ssl/nginx.crt;
+	ssl_certificate_key /etc/nginx/ssl/nginx.key;
+	ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+	ssl_prefer_server_ciphers on;
+	ssl_ciphers EECDH+CHACHA20:EECDH+AES128:RSA+AES128:EECDH+AES256:RSA+AES256:EECDH+3DES:RSA+3DES:!MD5;
+	ssl_dhparam /etc/nginx/ssl/dhparam.pem;
+	ssl_session_cache shared:SSL:20m;
+	ssl_session_timeout 180m;
+	resolver 8.8.8.8 8.8.4.4;
+	add_header Strict-Transport-Security "max-age=31536000" always;
+	# define error page
+	error_page 404 = @notfound;
+	# error page location redirect 301
+	location @notfound {
+		return 301 /;
+	}
+	location ~ \.php$ {
+		include /etc/nginx/fastcgi_params;
+		# intercept errors for 404 redirect
+		fastcgi_intercept_errors on;
+		fastcgi_pass unix:/run/php/php7.0-fpm.sock;
+		fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+	}
+	location ~ /\.ht {
+		deny all;
+	}
+	location = /nginx.conf {
+		deny all;
+	}
+	}
+server {
+	listen 80;
+	listen [::]:80;
+	server_name example.com www.example.com;
+	return 301 https://$server_name$request_uri;
+	}
