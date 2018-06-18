@@ -30,14 +30,14 @@ sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/ssl/
 sudo openssl dhparam -out /etc/nginx/ssl/dhparam.pem 2048
 cd /etc/nginx/
 sudo mv nginx.conf nginx.conf.backup
-wget -O nginx.conf https://goo.gl/n8crcR
+sudo wget -O nginx.conf https://goo.gl/n8crcR
 sudo mkdir /var/www/"$DOMAIN"
 cd /var/www/"$DOMAIN"
+sudo wget -O robots.txt https://goo.gl/a6oPLq
 sudo su -c 'echo "<?php phpinfo(); ?>" |tee info.php'
-sudo wget https://goo.gl/a6oPLq
 cd ~
 sudo wget wordpress.org/latest.zip
-unzip latest.zip
+sudo unzip latest.zip
 sudo mv wordpress/* /var/www/"$DOMAIN"/
 sudo rm -rf wordpress latest.zip
 
