@@ -18,9 +18,9 @@ sudo apt-get install pwgen -y
 echo "Sit back and relax :) ......"
 sleep 2;
 cd /etc/nginx/sites-available/
-wget -O "$DOMAIN" https://goo.gl/T3YBrn
-sed -i -e "s/example.com/$DOMAIN/" "$DOMAIN"
-sed -i -e "s/www.example.com/www.$DOMAIN/" "$DOMAIN"
+sudo wget -O "$DOMAIN" https://goo.gl/T3YBrn
+sudo sed -i -e "s/example.com/$DOMAIN/" "$DOMAIN"
+sudo sed -i -e "s/www.example.com/www.$DOMAIN/" "$DOMAIN"
 sudo ln -s /etc/nginx/sites-available/"$DOMAIN" /etc/nginx/sites-enabled/
 
 echo "Setting up Cloudflare FULL SSL"
@@ -34,11 +34,12 @@ wget -O nginx.conf https://goo.gl/n8crcR
 sudo mkdir /var/www/"$DOMAIN"
 cd /var/www/"$DOMAIN"
 sudo su -c 'echo "<?php phpinfo(); ?>" |tee info.php'
+sudo wget https://goo.gl/a6oPLq
 cd ~
-wget wordpress.org/latest.zip
+sudo wget wordpress.org/latest.zip
 unzip latest.zip
-mv /root/wordpress/* /var/www/"$DOMAIN"/
-rm -rf wordpress latest.zip
+sudo mv wordpress/* /var/www/"$DOMAIN"/
+sudo rm -rf wordpress latest.zip
 
 echo "Nginx server installation completed"
 sleep 2;
@@ -68,7 +69,7 @@ sudo systemctl restart php7.0-fpm.service
 sudo mysql_secure_installation
 PASS=`pwgen -s 14 1`
 
-mysql -uroot <<MYSQL_SCRIPT
+sudo mysql -uroot <<MYSQL_SCRIPT
 CREATE DATABASE $USERNAME;
 CREATE USER '$USERNAME'@'localhost' IDENTIFIED BY '$PASS';
 GRANT ALL PRIVILEGES ON $USERNAME.* TO '$USERNAME'@'localhost';
@@ -79,3 +80,8 @@ echo "Here is the database"
 echo "Database:   $USERNAME"
 echo "Username:   $USERNAME"
 echo "Password:   $PASS"
+
+echo "Installation & configuration succesfully finished.
+Twitter: @TeamKloudboy
+e-mail: support@kloudboy.com
+Bye!"
