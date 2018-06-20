@@ -8,6 +8,9 @@ server {
 		#try_files $uri $uri/ =404;
 		try_files $uri $uri/ /index.php?q=$uri&$args;
 	}
+	rewrite ^/sitemap.xml$ /index.php?aiosp_sitemap_path=root last;
+	rewrite ^/sitemap_(.+)_(\d+).xml$ /index.php?aiosp_sitemap_path=$1&aiosp_sitemap_page=$2 last;
+	rewrite ^/sitemap_(.+).xml$ /index.php?aiosp_sitemap_path=$1 last;
 	location ~* \.(txt|xml|js)$ {
 		expires 8d;
 	}
