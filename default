@@ -39,12 +39,14 @@ server {
 	location @notfound {
 		return 301 /;
 	}
-	location ~ \.php$ {
-		include /etc/nginx/fastcgi_params;
-		# intercept errors for 404 redirect
-		fastcgi_intercept_errors on;
-		fastcgi_pass unix:/run/php/php7.0-fpm.sock;
-		fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+    location ~ \.php$ {
+        try_files $uri =404;
+        fastcgi_split_path_info ^(.+\.php)(/.+)$;
+        fastcgi_pass unix:/var/run/php/php7.0-fpm.sock;
+        fastcgi_index index.php;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        include fastcgi_params;
+    }
 	}
 	location ~ /\.ht {
 		deny all;
