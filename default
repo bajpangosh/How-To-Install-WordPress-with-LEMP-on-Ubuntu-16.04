@@ -55,13 +55,6 @@ server {
         include fastcgi_params;
     }
 	}
-	location ~ /\.ht {
-		deny all;
-	}
-	location = /nginx.conf {
-		deny all;
-	}
-	}
 server {
 	listen 80;
 	listen [::]:80;
