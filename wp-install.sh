@@ -50,7 +50,8 @@ sudo systemctl restart nginx.service
 echo "lets install php 7.0 and modules"
 sleep 2;
 sudo apt install php7.0 php7.0-fpm -y
-sudo apt-get -y install php7.0-fpm php7.0-curl php7.0-gd php7.0-imap php7.0-mcrypt php7.0-readline php7.0-common php7.0-recode php7.0-mysql php7.0-cli php7.0-curl php7.0-mbstring php7.0-bcmath php7.0-mysql php7.0-opcache php7.0-zip php7.0-xml php-memcached php-imagick php-memcache memcached graphviz php-pear php-xdebug php-msgpack  php7.0-soap
+sudo apt-get -y install php7.0-fpm php7.0-curl php7.0-gd php7.0-imap php7.0-mcrypt php7.0-readline php7.0-common php7.0-recode 
+php7.0-cli php7.0-curl php7.0-mbstring php7.0-bcmath php7.0-opcache php7.0-zip php7.0-xml php-memcached php-imagick php-memcache memcached graphviz php-pear php-xdebug php-msgpack  php7.0-soap
 
 echo "Some php.ini tweaks"
 sleep 2;
@@ -63,7 +64,7 @@ sudo systemctl restart php7.0-fpm.service
 
 echo "Instaling MariaDB"
 sleep 2;
-sudo apt install mariadb-server mariadb-client php7.0-mysql -y
+sudo apt install mariadb-server mariadb-client -y
 sudo systemctl restart php7.0-fpm.service
 sudo mysql_secure_installation
 PASS=`pwgen -s 14 1`
