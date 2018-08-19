@@ -2,7 +2,7 @@
 # GET ALL USER INPUT
 echo "Domain Name (eg. example.com)?"
 read DOMAIN
-echo "Username (eg. nextcloud)?"
+echo "Username (eg. mysitedatabase)?"
 read USERNAME
 echo "Updating OS................."
 sleep 2;
