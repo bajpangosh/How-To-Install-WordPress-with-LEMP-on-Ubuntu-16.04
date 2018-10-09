@@ -22,14 +22,6 @@ sudo wget -O "$DOMAIN" https://goo.gl/T3YBrn
 sudo sed -i -e "s/example.com/$DOMAIN/" "$DOMAIN"
 sudo sed -i -e "s/www.example.com/www.$DOMAIN/" "$DOMAIN"
 sudo ln -s /etc/nginx/sites-available/"$DOMAIN" /etc/nginx/sites-enabled/
-
-echo "Setting up Cloudflare FULL SSL"
-sleep 2;
-sudo add-apt-repository ppa:certbot/certbot
-sudo apt install python-certbot-nginx
-sudo certbot --nginx -d $DOMAIN -d www.$DOMAIN
-sudo certbot renew --dry-run
-
 cd /etc/nginx/
 sudo mv nginx.conf nginx.conf.backup
 sudo wget -O nginx.conf https://goo.gl/n8crcR
@@ -48,6 +40,13 @@ sleep 2;
 cd ~
 sudo chown www-data:www-data -R /var/www/"$DOMAIN"
 sudo systemctl restart nginx.service
+
+echo "Setting up Cloudflare FULL SSL"
+sleep 2;
+sudo add-apt-repository ppa:certbot/certbot
+sudo apt install python-certbot-nginx
+sudo certbot --nginx -d $DOMAIN -d www.$DOMAIN
+sudo certbot renew --dry-run
 
 echo "lets install php 7.0 and modules"
 sleep 2;
