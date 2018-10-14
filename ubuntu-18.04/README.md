@@ -1,8 +1,7 @@
 # How To Install WordPress with LEMP on Ubuntu 18.04
 
 This LEMP stack is that fastest way to start running WordPress on your server. Using Nginx, PHP 7.2, Mariadb.
-Use only on 
-###### Ubuntu-18.04.
+###### Use only on Ubuntu-18.04.
 
 ## Features
 
