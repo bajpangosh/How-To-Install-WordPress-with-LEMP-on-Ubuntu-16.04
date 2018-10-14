@@ -15,8 +15,8 @@ Use only on Ubuntu-18.04.
 
 > Wordpress (updated)
 
-`wget -qO wp run.kloudboy.com/wp && sudo bash wp`
+`wget -qO wp-u18-04 run.kloudboy.com/wp-u18-04 && sudo bash wp-u18-04`
 
-# If you need to install wordpress on same droplet, use this script
+# If you want to install another wordpress on same droplet, use below script
 
 `wget -qO sub.sh https://goo.gl/VDsnJp && chmod u+x sub.sh && bash sub.sh`
