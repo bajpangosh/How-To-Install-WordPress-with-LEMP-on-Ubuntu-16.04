@@ -2,7 +2,7 @@
 # GET ALL USER INPUT
 echo "Domain Name (eg. example.com)?"
 read DOMAIN
-echo "Username (eg. databse name)?"
+echo "Username (eg. database name)?"
 read USERNAME
 echo "Updating OS................."
 sleep 2;
