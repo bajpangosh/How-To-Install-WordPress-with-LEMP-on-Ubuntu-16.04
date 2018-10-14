@@ -10,10 +10,7 @@ sudo apt-get update
 
 echo "Installing Nginx"
 sleep 2;
-sudo apt-get install nginx -y
-sudo apt-get install zip -y
-sudo apt install unzip -y
-sudo apt-get install pwgen -y
+sudo apt-get install nginx zip unzip pwgen -y
 
 echo "Sit back and relax :) ......"
 sleep 2;
@@ -36,23 +33,26 @@ cd /var/www/"$DOMAIN"
 sudo wget -O robots.txt https://goo.gl/a6oPLq
 sudo su -c 'echo "<?php phpinfo(); ?>" |tee info.php'
 cd ~
+
+echo "Downloading Latest Wordpress...."
+sleep 2;
 sudo wget wordpress.org/latest.zip
 sudo unzip latest.zip
 sudo mv wordpress/* /var/www/"$DOMAIN"/
 sudo rm -rf wordpress latest.zip
 
-echo "Nginx server installation completed"
+echo "Nginx server installation completed.."
 sleep 2;
 cd ~
 sudo chown www-data:www-data -R /var/www/"$DOMAIN"
 sudo systemctl restart nginx.service
 
-echo "lets install php 7.2 and modules"
+echo "let's install php 7.2 and modules"
 sleep 2;
 sudo apt install php7.2 php7.2-fpm -y
 sudo apt-get -y install php7.2-intl php7.2-curl php7.2-gd php7.2-imap php7.2-readline php7.2-common php7.2-recode php7.2-mysql php7.2-cli php7.2-curl php7.2-mbstring php7.2-bcmath php7.2-mysql php7.2-opcache php7.2-zip php7.2-xml php-memcached php-imagick php-memcache memcached graphviz php-pear php-xdebug php-msgpack  php7.2-soap
 
-echo "Some php.ini tweaks"
+echo "Some php.ini Tweaks"
 sleep 2;
 sudo sed -i "s/post_max_size = .*/post_max_size = 2000M/" /etc/php/7.2/fpm/php.ini
 sudo sed -i "s/memory_limit = .*/memory_limit = 3000M/" /etc/php/7.2/fpm/php.ini
@@ -75,7 +75,7 @@ GRANT ALL PRIVILEGES ON $USERNAME.* TO '$USERNAME'@'localhost';
 FLUSH PRIVILEGES;
 MYSQL_SCRIPT
 
-echo "Here is the database"
+echo "Here is your Database Credentials"
 echo "Database:   $USERNAME"
 echo "Username:   $USERNAME"
 echo "Password:   $PASS"
