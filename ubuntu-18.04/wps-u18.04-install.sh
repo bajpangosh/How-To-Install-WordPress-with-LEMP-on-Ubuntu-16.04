@@ -46,3 +46,4 @@ echo "Here is the database"
 echo "Database:   $USERNAME"
 echo "Username:   $USERNAME"
 echo "Password:   $PASS"
+sudo rm -rf wps-u18-04
