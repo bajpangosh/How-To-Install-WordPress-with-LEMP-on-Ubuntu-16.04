@@ -1,12 +1,6 @@
 # How To Install WordPress with LEMP on Ubuntu 18.04
 > This LEMP stack is that fastest way to start running WordPress on your server. Using Nginx, PHP 7.2, Mariadb.
 
-[![NPM Version][npm-image]][npm-url]
-[![Build Status][travis-image]][travis-url]
-[![Downloads Stats][npm-downloads]][npm-url]
-
-One to two paragraph statement about your product and what it does.
-
 ![](wordpress.jpg)
 
 ## Installation & Usage
@@ -19,7 +13,7 @@ Linux Only:
 wget -qO wp-u18-04 run.kloudboy.com/wp-u18-04 && sudo bash wp-u18-04
 ```
 
-# If you want to install another Wordpress on same droplet, use below script
+## If you want to install another Wordpress on same droplet, use below script
 
 ```sh
 wget -qO wps-u18-04 run.kloudboy.com/wps-u18-04 && sudo bash wps-u18-04
@@ -53,8 +47,11 @@ I'd be glad to help you if you have any questions relating to this scrpit. No gu
 Support via Facebook,Twitter Email @ Ticket
 
 email    :-support@kloudboy.com
+
 facebook :- https://m.me/TeamKloudBoy
+
 twitter  :- https://twitter.com/TeamKloudBoy
+
 ticket   :-https://kloudboy.freshdesk.com/support/home
 
 https://kloudboy.com/
