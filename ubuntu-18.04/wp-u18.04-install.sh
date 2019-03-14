@@ -19,7 +19,9 @@ sudo wget -O "$DOMAIN" https://raw.githubusercontent.com/bajpangosh/How-To-Insta
 sudo sed -i -e "s/example.com/$DOMAIN/" "$DOMAIN"
 sudo sed -i -e "s/www.example.com/www.$DOMAIN/" "$DOMAIN"
 sudo ln -s /etc/nginx/sites-available/"$DOMAIN" /etc/nginx/sites-enabled/
-
+sudo mkdir /etc/nginx/kloudboy
+sudo wget https://raw.githubusercontent.com/bajpangosh/How-To-Install-WordPress-with-LEMP-on-Ubuntu-16.04/master/ubuntu-18.04/general.conf
+sudo wget https://raw.githubusercontent.com/bajpangosh/How-To-Install-WordPress-with-LEMP-on-Ubuntu-16.04/master/ubuntu-18.04/php_fastcgi.conf
 echo "Setting up Cloudflare FULL SSL"
 sleep 2;
 sudo mkdir /etc/nginx/ssl
@@ -27,24 +29,22 @@ sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/ssl/
 sudo openssl dhparam -out /etc/nginx/ssl/dhparam.pem 2048
 cd /etc/nginx/
 sudo mv nginx.conf nginx.conf.backup
-sudo wget -O nginx.conf https://goo.gl/n8crcR
-sudo mkdir /var/www/"$DOMAIN"
-cd /var/www/"$DOMAIN"
-sudo wget -O robots.txt https://goo.gl/a6oPLq
-sudo su -c 'echo "<?php phpinfo(); ?>" |tee info.php'
+sudo wget -O nginx.conf https://raw.githubusercontent.com/bajpangosh/How-To-Install-WordPress-with-LEMP-on-Ubuntu-16.04/master/ubuntu-18.04/nginx.conf
+sudo mkdir -p /var/www/"$DOMAIN"/public
+cd /var/www/"$DOMAIN/public"
 cd ~
 
 echo "Downloading Latest Wordpress...."
 sleep 2;
 sudo wget wordpress.org/latest.zip
 sudo unzip latest.zip
-sudo mv wordpress/* /var/www/"$DOMAIN"/
+sudo mv wordpress/* /var/www/"$DOMAIN"/public/
 sudo rm -rf wordpress latest.zip
 
 echo "Nginx server installation completed.."
 sleep 2;
 cd ~
-sudo chown www-data:www-data -R /var/www/"$DOMAIN"
+sudo chown www-data:www-data -R /var/www/"$DOMAIN"/public
 sudo systemctl restart nginx.service
 
 echo "let's install php 7.2 and modules"
